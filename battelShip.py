@@ -26,11 +26,15 @@ class Field:
     
     def viewBattleField(self):
         mx = max((len(str(ele)) for sub in self.ground for ele in sub))
-        print ("--------------------------------")
-        for row in self.ground:
-            print(" ".join(["{:<{mx}}".format(ele,mx=mx) for ele in row]))
-            print ("--------------------------------")
-        return            
+        rotAry = new_matrix = [[self.ground[j][i] for j in range(len(self.ground))] for i in range(len(self.ground[0])-1,-1,-1)]
+        print ("-----------------------------------------------")
+        for row in rotAry:
+            print(" | ".join(["{:<{mx}}".format(ele,mx=mx).replace("^^","  ") for ele in row]))
+            print ("-----------------------------------------------")
+        return
+        # revGround = self.ground.copy()  
+        # revGround.reverse()
+        # print(np.matrix(revGround))
  
 
 # A Battle class  

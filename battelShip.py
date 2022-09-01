@@ -7,7 +7,7 @@ class Field:
     # init method or constructor
     def __init__(self, size):
         self.size = size
-        self.ground = [ [ "^^" ] * size ] * size
+        self.ground = [ ["^^"]*size for i in range(size)]
  
     # Sample Method
     def setBlock(self, x, y, shipName):
@@ -50,22 +50,22 @@ class Battle:
         if shipSize%2 != 0:
             print(" for simplecity purpose we are not considering odd numbers for ship size")
             return False
-        if ((ax >= (self.size)//2)) or (ay >= (self.size)//2) or (ax < 0 or ay <0 ):
+        if ((ax >= (self.size)//2)) or (ay >= (self.size)) or (ax < 0 or ay <0 ):
             print("Invalid ship location for player - A")
             return False
         else:
-            for x in range(ax - (shipSize//2),ax + 1 + (shipSize//2)):
-                for y in range(ay - (shipSize//2),ay + 1 + (shipSize//2)):
+            for x in range(ax - (shipSize//2),ax  + (shipSize//2)):
+                for y in range(ay - (shipSize//2),ay + (shipSize//2)):
                     success = self.field.setBlock( x, y, "A-"+shipName)
                     if not success:
                         return False
-        if ((bx < (self.size)//2)) or (by < (self.size)//2) or (bx >= self.size or by >= self.size ):
+        if ((bx < (self.size)//2)) or (bx >= self.size or by >= self.size ) or by < 0:
             print("Invalid ship location for player - B")
             return False
         else:
-            for x in range(bx - (shipSize//2),bx + 1 + (shipSize//2)):
-                for y in range(by - (shipSize//2),by + 1 + (shipSize//2)):
-                    success = self.field.setBlock( x, y, "A-"+shipName)
+            for x in range(bx - (shipSize//2),bx  + (shipSize//2)):
+                for y in range(by - (shipSize//2),by + (shipSize//2)):
+                    success = self.field.setBlock( x, y, "B-"+shipName)
                     if not success:
                         return False
         self.aShip += 1
@@ -145,3 +145,9 @@ def startGame():
             battleField.startGame()
     except:
         print("please Initate the game first" )
+
+
+initGame(6)
+addShip("SH1", 2, 1, 5, 4, 4)
+viewBattleField()
+startGame()
